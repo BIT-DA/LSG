@@ -23,11 +23,12 @@ However, the significance of additional knowledge contained within labels has be
 
 ## Paradigm Introduction
 
-LSG is a simple data-efficient learning paradigm that includes three parts:
+LSG is a simple data-efficient learning paradigm that includes three steps:
 
-1. Obtain text embedding of task concepts via pre-trained language model (PLM). (This part can be conducted before the visual training once and for all for a given dataset.)
-2. Main task loss (i.e., CrossEntropy)
-3. Distribution alignment loss that leverages text embedding space to promote data-efficient visual training.
+1. Obtain text embedding of labels via pre-trained language model (PLM).
+2. (The first training stage, lightweighted.) Consturct Language Semantic Graph (LSG) and correspondingly train a GCN to model the semantic relationship between embedded labels.
+3. (The primary training stage.) Train the model with main task loss (i.e., CrossEntropy),
+and the two proposed alignment loss that leverage LSG and the pretrained GCN to learn label semantic information.
 
 ## Dataset
 
@@ -37,7 +38,6 @@ If the datasets are not automatically downloaded, they can be manually downloade
 
 <details>
   <summary>Aircraft</summary>
-
   Create directory `./lsg_training/Aircraft`.
   Download image_list.zip from [here](https://cloud.tsinghua.edu.cn/f/449157d27987463cbdb1/?dl=1), train.tgz from [here](https://cloud.tsinghua.edu.cn/f/06804f17fdb947aa9401/?dl=1) and test.tgz from [here](https://cloud.tsinghua.edu.cn/f/164996d09cc749abbdeb/?dl=1).
   Extract them, and the directory will look like:
@@ -53,6 +53,7 @@ If the datasets are not automatically downloaded, they can be manually downloade
   │   ├── train15.txt
   │   ├── test.txt
   ```
+</details>
 
 ## Training 
 
